@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Game } from 'src/app/game/game.model';
+import { Panel } from 'src/app/panel/panel.model';
 
 
 @Component({
@@ -8,15 +8,25 @@ import { Game } from 'src/app/game/game.model';
   styleUrls: ['./panel.component.css']
 })
 export class PanelComponent implements OnInit {
-  @Input() model: Game;
+  @Input() model: Panel;
+  @Input() word: string
+  @Input() letter: string
 
 
   constructor() {
-    this.model = { lifes: 6, name: "Fernando", win: true, lose: false }
+    
   }
 
   ngOnInit() {
+    this.try()
+  
 
+  } 
+
+  try(){   
+    if (this.word.toUpperCase().indexOf(this.letter.toUpperCase()) < 0){
+      this.model.lifes--
+    }
   }
 
 }

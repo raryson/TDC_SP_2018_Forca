@@ -1,4 +1,4 @@
-export interface Game {
+export interface Panel {
 
     name: string
     lifes: number
