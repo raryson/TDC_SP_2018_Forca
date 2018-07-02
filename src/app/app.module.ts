@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { PubNubAngular } from 'pubnub-angular2';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -16,7 +17,7 @@ import { PanelComponent } from './panel/panel.component';
    imports: [
       BrowserModule
    ],
-   providers: [],
+   providers: [PubNubAngular],
    bootstrap: [
       AppComponent
    ]
