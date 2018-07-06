@@ -12,28 +12,34 @@ export class GameComponent implements OnInit {
   modelPanel: Panel;
   pubnub: PubNubAngular;
   channel: string;
+  userChannel : string;
   constructor(pubnub: PubNubAngular) {
-    this.channel = 'jogando';
-    this.pubnub = pubnub;
+    this.channel = 'jogando'
+    this.userChannel = 'usuario'
+
+    this.pubnub = pubnub
+
     this.pubnub.init({
       publishKey: 'pub-c-bddd3276-8045-43cc-bc90-35b4b09e93f7',
       subscribeKey: 'sub-c-1bfc82f2-7d97-11e8-a43f-d6f8762e29f7'
-    });
+    })
+
     this.pubnub.subscribe({
-      channels: [this.channel],
+      channels: [this.channel, this.userChannel],
       triggerEvents: ['message']
-    });
+    })
 
     this.pubnub.publish({
       channel: this.channel, message: "funcionou"
-    });
+    })
 
-    pubnub.getMessage('jogando', function (msg) {
+    pubnub.getMessage(this.channel, function (msg) {
       console.log(msg.message);
-    });
+    })
 
-
-
+    pubnub.getMessage(this.userChannel, (msg) => {
+      this.modelPanel.name = msg.message
+    })
 
   }
 
